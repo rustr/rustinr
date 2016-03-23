@@ -87,8 +87,12 @@ rust <- function(path, code, depend = NULL, rebuild = FALSE) {
         cargo = ifelse(Sys.getenv("CARGO_HOME") != "",
                        Sys.getenv("CARGO_HOME"),
                        "cargo")
+        if(.Platform$OS.type == "windows"){
+            cmd = paste(cargo, "build --release ")
+        } else{
+            cmd = paste(cargo, "build --release 2>&1")
+        }
 
-        cmd = paste(cargo, "build --release 2>&1")
         result <-
             suppressWarnings(system(cmd, intern = !getOption("verbose")))
         status <- attr(result, "status")
