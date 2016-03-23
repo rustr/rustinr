@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^packrat/
+^\.travis\.yml$
+^\.dat$
+^.*\.txt$
+^.*\.dat$
+^appveyor\.yml$
+.vscode/
+.Rprofile
+^src/rustlib/target$
+ig.R
