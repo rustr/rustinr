@@ -118,8 +118,8 @@ rustr_init <- function(name,
               file.path(rust_src_src, "lib.rs"))
 
     manu <- file.path(root, "man")
-    file.remove(file.path(manu, "hi.Rd"))
-    file.remove(file.path(manu, paste0(name,"-package.Rd")))
+    suppressWarnings(file.remove(file.path(manu, "hi.Rd")))
+    suppressWarnings(file.remove(file.path(manu, paste0(name,"-package.Rd"))))
     rustrize(root)
 
     invisible(NULL)
