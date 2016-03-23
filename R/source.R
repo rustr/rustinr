@@ -88,7 +88,7 @@ rust <- function(path, code, depend = NULL, rebuild = FALSE) {
                        Sys.getenv("CARGO_HOME"),
                        "cargo")
 
-        cmd = paste(cargo, "build --release")
+        cmd = paste(cargo, "build --release 2>&1")
         result <-
             suppressWarnings(system(cmd, intern = !getOption("verbose")))
         status <- attr(result, "status")
