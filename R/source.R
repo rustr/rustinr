@@ -50,8 +50,8 @@ rust <- function(path, code, depend = NULL, rebuild = FALSE) {
                 stop(paste("can not create tempdir : ", pathdir))
             }
             suppressMessages(rustr_init(rss, path = tempdir()))
-            file.remove(file.path(pathdir, "src", "Makevars.win"))
-            file.remove(file.path(pathdir, "man", paste0(rss, "-package.Rd")))
+            suppressWarnings(file.remove(file.path(pathdir, "src", "Makevars.win")))
+            suppressWarnings(file.remove(file.path(pathdir, "man", paste0(rss, "-package.Rd"))))
         } else{
             x = readLines(file.path(pathdir, "DESCRIPTION"))
             x[1] = paste0("Package: ", rss2)
