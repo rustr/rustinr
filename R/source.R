@@ -103,7 +103,6 @@ rust <- function(path, code, depend = NULL, rebuild = FALSE) {
                  status,
                  " occurred building shared library.")
         }
-
         setwd(file.path(pathdir, "src"))
 
         linklib = ifelse(
@@ -140,6 +139,7 @@ rust <- function(path, code, depend = NULL, rebuild = FALSE) {
 
         result <-
             suppressWarnings(system(cmd, intern = !getOption("verbose")))
+        status <- attr(result, "status")
         if (!is.null(status)) {
             cat(result, sep = "\n")
             succeeded <- FALSE
