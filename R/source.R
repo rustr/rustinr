@@ -5,7 +5,7 @@
 #' @param path package path
 #' @param code rust code
 #' @export
-rust <- function(path, code, depend = NULL, rebuild = FALSE) {
+rust <- function(code, path, depend = NULL, rebuild = FALSE) {
     if (!missing(code)) {
         file <- tempfile(fileext = ".rs")
         con <- file(file, open = "w")
