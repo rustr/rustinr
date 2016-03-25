@@ -10,10 +10,10 @@ endif
 all: $(SHLIB)
 
 # cargo build --release folder
-$(SHLIB): rustlib/target/release/librustlib.a
+$(SHLIB): rustlib/target/release/librustlib.rlib
 
 # run cargo
-rustlib/target/release/librustlib.a: rustlib/src/*.rs
+rustlib/target/release/librustlib.rlib: rustlib/src/*.rs
 	cd rustlib && $(CG) build --release
 
 # -lws2_32 -luserenv -ladvapi32 is needed for linking on windows
