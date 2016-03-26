@@ -5,6 +5,7 @@
 #   https://github.com/eddelbuettel/r-travis/
 
 language: c
+dist: trusty
 
 os:
   - linux
