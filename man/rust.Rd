@@ -4,16 +4,18 @@
 \alias{rust}
 \title{Source rust file}
 \usage{
-rust(path, code, depend = NULL, rebuild = FALSE)
+rust(code, path, depend = NULL, rebuild = FALSE, env = globalenv())
 }
 \arguments{
-\item{path}{package path}
-
 \item{code}{rust code}
+
+\item{path}{package path}
 
 \item{depend}{rustr version}
 
 \item{rebuild}{rebuild cache}
+
+\item{env}{an environment, determining where the export R functions are evaluated}
 }
 \description{
 Source rust file

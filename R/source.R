@@ -4,8 +4,9 @@
 #' @param rebuild rebuild cache
 #' @param path package path
 #' @param code rust code
+#' @param env  an environment, determining where the export R functions are evaluated
 #' @export
-rust <- function(code, path, depend = NULL, rebuild = FALSE) {
+rust <- function(code, path, depend = NULL, rebuild = FALSE, env = globalenv()) {
     if (!missing(code)) {
         file <- tempfile(fileext = ".rs")
         con <- file(file, open = "w")
@@ -148,7 +149,7 @@ rust <- function(code, path, depend = NULL, rebuild = FALSE) {
                  " occurred building shared library.")
         }
         dyn.load(file.path(paste0(rss2, .Platform$dynlib.ext)))
-        source("../R/REXPORT.R", local = FALSE)
+        source("../R/REXPORT.R", local = env)
         succeeded <- TRUE
     }, finally = {
         if (!succeeded)
