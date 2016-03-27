@@ -263,9 +263,8 @@ EnvRtools <- function() {
                             paste(path,
                                   Sys.getenv("PATH"),
                                   sep = .Platform$path.sep)
-                        binpref = ifelse(.Platform$r_arch == "x64","mingw_64","mingw_32")
                         env$RTOOLS <- .rtoolsPath(rToolsPath)
-                        env$BINPREF <-  file.path(env$RTOOLS, binpref,"bin//",fsep = "/")
+                        env$BINPREF <-  file.path(env$RTOOLS,"mingw_$(WIN)/bin//",fsep = "/")
                         return(env)
                     }
                 }
