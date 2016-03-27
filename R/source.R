@@ -251,7 +251,7 @@ EnvRtools <- function() {
         if (!is.null(key)) {
             ver <- key$`Current Version`
             if (ver %in% (c("2.15", "2.16", "3.0", "3.1", "3.2", "3.3"))) {
-                isGcc49 <- FALSE
+                isGcc49 <- TRUE
                 rToolsPath <- key$`InstallPath`
                 if (!is.null(rToolsPath)) {
                     path <- file.path(rToolsPath, "bin", fsep = "\\")
@@ -267,8 +267,10 @@ EnvRtools <- function() {
                             paste(path,
                                   Sys.getenv("PATH"),
                                   sep = .Platform$path.sep)
-                        if (isGcc49)
+                        binpref = ifelse(.Platform$r_arch == "x64","mingw_64","mingw_32")
+                        if (isGcc49){
                             env$RTOOLS <- .rtoolsPath(rToolsPath)
+                            env$BINPREF <-  file.path(env$RTOOLS, binpref,"bin//",fsep = "/")}
                         return(env)
                     }
                 }
