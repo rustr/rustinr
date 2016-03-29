@@ -9,12 +9,10 @@ init:
         
 install:
   - ps: Bootstrap
-  - ps: $rust32 = "https://static.rust-lang.org/dist/rust-${channel}-i686-pc-windows-gnu.exe"
-  - ps: Start-FileDownload $rust32
-  - rust-%channel%-i686-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust32"
-  - ps: $rust64 = "https://static.rust-lang.org/dist/rust-${channel}-x86_64-pc-windows-gnu.exe"
-  - ps: Start-FileDownload $rust64
-  - rust-%channel%-x86_64-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust"
+  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe"
+  - rust-nightly-i686-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust32"
+  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe"
+  - rust-nightly-x86_64-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust"
   - md C:\Rust\lib\rustlib\i686-pc-windows-gnu
   - xcopy C:\Rust32\lib\rustlib\i686-pc-windows-gnu C:\Rust\lib\rustlib\i686-pc-windows-gnu /s /e /h
   - SET PATH=%PATH%;C:\Rust\bin

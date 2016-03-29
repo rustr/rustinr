@@ -25,7 +25,6 @@ sudo: required
 # run builds for all the trains (and more)
 rust:
   - nightly
-  - beta
   - stable
 
 env:
