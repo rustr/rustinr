@@ -9,33 +9,27 @@ init:
         
 install:
   - ps: Bootstrap
-  - ps: Start-FileDownload 'https://static.rust-lang.org/dist/rust-${channel}-i686-pc-windows-gnu.exe'
-  - ps: rust-${channel}-i686-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust32"
-  - ps: Start-FileDownload 'https://static.rust-lang.org/dist/rust-${channel}-x86_64-pc-windows-gnu.exe'
-  - ps: rust-${channel}-x86_64-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust"
+  - ps: $rust32 = 'https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe'
+  - ps: Start-FileDownload $rust32
+  - ps: rust-nightly-i686-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust32"
+  - ps: $rust64 = 'https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe'
+  - ps: Start-FileDownload $rust64
+  - ps: rust-nightly-x86_64-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust"
   - md C:\Rust\lib\rustlib\i686-pc-windows-gnu
   - xcopy C:\Rust32\lib\rustlib\i686-pc-windows-gnu C:\Rust\lib\rustlib\i686-pc-windows-gnu /s /e /h
+  - SET PATH=%PATH%;C:\Rust\bin
 # Adapt as necessary starting from here
 
 environment:
   matrix:
-  - R_VERSION: devel
-    GCC_PATH: mingw_32
-    channel: stable
+  # - R_VERSION: devel
+  #   GCC_PATH: mingw_32
+  #   channel: stable
 
-  - R_VERSION: devel
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-    channel: stable
-
-  - R_VERSION: devel
-    GCC_PATH: mingw_32
-    channel: beta
-
-  - R_VERSION: devel
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-    channel: beta
+  # - R_VERSION: devel
+  #   R_ARCH: x64
+  #   GCC_PATH: mingw_64
+  #   channel: stable
 
   - R_VERSION: devel
     GCC_PATH: mingw_32
