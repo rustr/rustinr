@@ -3,8 +3,15 @@
 # See the r-travis repo and its wiki 
 #   https://github.com/craigcitro/r-travis/wiki
 #   https://github.com/eddelbuettel/r-travis/
+language: rust
+# necessary for `travis-cargo coveralls --no-sudo`
+addons:
+  apt:
+    packages:
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
 
-language: c
 dist: trusty
 
 os:
@@ -13,7 +20,13 @@ os:
 
 osx_image: xcode7.1
 
-sudo: true
+sudo: required
+
+# run builds for all the trains (and more)
+rust:
+  - nightly
+  - beta
+  - stable
 
 env:
   global:
