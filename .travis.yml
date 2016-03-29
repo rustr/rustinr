@@ -31,9 +31,12 @@ rust:
 env:
   global:
     - OS=$(uname -s)
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+    - R_CHECK_ARGS="--no-vignettes --no-manual"
+    - BOOTSTRAP_PANDOC="1"
   matrix:
-    - _R_CHECK_CRAN_INCOMING_=FALSE
-    - _R_CHECK_CRAN_INCOMING_=TRUE
+    - _R_CHECK_CRAN_INCOMING_=FALSE 
+    - _R_CHECK_CRAN_INCOMING_=TRUE R_CHECK_ARGS="--no-vignettes --no-manual --as-cran"
 
 before_install:
   - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
