@@ -6,11 +6,45 @@ init:
         $ErrorActionPreference = "Stop"
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
-
+        
 install:
-  ps: Bootstrap
-
+  - ps: Bootstrap
+  - ps: Start-FileDownload 'https://static.rust-lang.org/dist/rust-${channel}-i686-pc-windows-gnu.exe'
+  - ps: rust-${channel}-i686-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust32"
+  - ps: Start-FileDownload 'https://static.rust-lang.org/dist/rust-${channel}-x86_64-pc-windows-gnu.exe'
+  - ps: rust-${channel}-x86_64-pc-windows-gnu.exe /VERYSILENT /NORESTART /DIR="C:\Rust"
+  - md C:\Rust\lib\rustlib\i686-pc-windows-gnu
+  - xcopy C:\Rust32\lib\rustlib\i686-pc-windows-gnu C:\Rust\lib\rustlib\i686-pc-windows-gnu /s /e /h
 # Adapt as necessary starting from here
+
+environment:
+  matrix:
+  - R_VERSION: devel
+    GCC_PATH: mingw_32
+    channel: stable
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+    channel: stable
+
+  - R_VERSION: devel
+    GCC_PATH: mingw_32
+    channel: beta
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+    channel: beta
+
+  - R_VERSION: devel
+    GCC_PATH: mingw_32
+    channel: nightly
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+    channel: nightly
 
 build_script:
   - travis-tool.sh install_deps
@@ -20,6 +54,8 @@ test_script:
 
 on_failure:
   - travis-tool.sh dump_logs
+  - 7z a failure.zip *.Rcheck\*
+  - appveyor PushArtifact failure.zip
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
@@ -39,3 +75,4 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+    
