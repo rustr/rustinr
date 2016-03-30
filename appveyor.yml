@@ -25,6 +25,7 @@ install:
 environment:
   matrix:
   - R_VERSION: devel
+    R_ARCH: i386
     GCC_PATH: mingw_32
     channel: nightly
     NOT_CRAN: true
