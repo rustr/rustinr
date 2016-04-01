@@ -4,7 +4,8 @@
 \alias{rust}
 \title{Source rust file}
 \usage{
-rust(code, path, depend = NULL, rebuild = FALSE, env = globalenv())
+rust(code, path, depend = NULL, header = TRUE, rebuild = FALSE,
+  env = globalenv())
 }
 \arguments{
 \item{code}{rust code}
@@ -12,6 +13,8 @@ rust(code, path, depend = NULL, rebuild = FALSE, env = globalenv())
 \item{path}{package path}
 
 \item{depend}{rustr version}
+
+\item{header}{add header}
 
 \item{rebuild}{rebuild cache}
 

@@ -2,19 +2,22 @@
 #'
 #' @param depend rustr version
 #' @param rebuild rebuild cache
+#' @param header add header
 #' @param path package path
 #' @param code rust code
 #' @param env  an environment, determining where the export R functions are evaluated
 #' @export
-rust <- function(code, path, depend = NULL, rebuild = FALSE, env = globalenv()) {
+rust <- function(code, path, depend = NULL, header = TRUE, rebuild = FALSE, env = globalenv()) {
     if (!missing(code)) {
         file <- tempfile(fileext = ".rs")
         con <- file(file, open = "w")
-        writeLines(c("#[macro_use]",
-                     "extern crate rustr;",
-                     "pub mod export;",
-                     "pub use rustr::*;"
-                     ),con)
+        if (header){
+            writeLines(c("#[macro_use]",
+                         "extern crate rustr;",
+                         "pub mod export;",
+                         "pub use rustr::*;"
+            ),con)
+        }
         writeLines(code, con)
         close(con)
         path2 = normalizePath(file)
