@@ -2,25 +2,25 @@
 % Please edit documentation in R/source.R
 \name{rust}
 \alias{rust}
-\title{Source rust file}
+\title{Source Rust file}
 \usage{
 rust(code, path, depend = NULL, header = TRUE, rebuild = FALSE,
   env = globalenv())
 }
 \arguments{
-\item{code}{rust code}
+\item{code}{Rust code}
 
-\item{path}{package path}
+\item{path}{Rust file path}
 
-\item{depend}{rustr version}
+\item{depend}{Rust dependencies}
 
-\item{header}{add header}
+\item{header}{Add default Rust header}
 
-\item{rebuild}{rebuild cache}
+\item{rebuild}{Force rebuild cache}
 
-\item{env}{an environment, determining where the export R functions are evaluated}
+\item{env}{An environment, determining where the export R functions are evaluated}
 }
 \description{
-Source rust file
+Source Rust file
 }
 

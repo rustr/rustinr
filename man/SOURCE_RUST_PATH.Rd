@@ -3,13 +3,13 @@
 \docType{data}
 \name{SOURCE_RUST_PATH}
 \alias{SOURCE_RUST_PATH}
-\title{Temporary Folder for source_rust()}
+\title{Temporary folder for source_rust()}
 \format{An object of class \code{environment} of length 1.}
 \usage{
 SOURCE_RUST_PATH
 }
 \description{
-Temporary Folder for source_rust()
+Temporary folder for source_rust()
 }
 \keyword{datasets}
 

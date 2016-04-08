@@ -2,7 +2,7 @@
 % Please edit documentation in R/init.R
 \name{rustr_init}
 \alias{rustr_init}
-\title{Create a Skeleton for a New Source Package}
+\title{Create a Skeleton for a new source package}
 \usage{
 rustr_init(name, path = ".", force = FALSE, code_files = character(),
   rust_files = character(), author = "Your Name", maintainer = if
@@ -10,25 +10,28 @@ rustr_init(name, path = ".", force = FALSE, code_files = character(),
   license = "MIT")
 }
 \arguments{
-\item{name}{character string: the package name and directory name for your package.}
+\item{name}{A character string: the package name and directory name for your package.}
 
-\item{path}{path to put the package directory in.}
+\item{path}{A path to put the package directory in.}
 
-\item{force}{If FALSE will not overwrite an existing directory.}
+\item{force}{See \link[utils]{package.skeleton}}
 
-\item{code_files}{a character vector with the paths to R code files to build the package around.}
+\item{code_files}{See \link[utils]{package.skeleton}}
 
-\item{rust_files}{rust files}
+\item{rust_files}{A character vector with the paths to Rust source files to add to the package.}
 
-\item{author}{author}
+\item{author}{Author of the package.}
 
-\item{maintainer}{maintainer}
+\item{maintainer}{Maintainer of the package.}
 
-\item{email}{email}
+\item{email}{Email of the package maintainer.}
 
-\item{license}{license}
+\item{license}{License of the package.}
 }
 \description{
-Create a Skeleton for a New Source Package
+Create a Skeleton for a new source package
+}
+\references{
+Read the \emph{Writing R Extensions} manual for more details.
 }
 

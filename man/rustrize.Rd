@@ -2,7 +2,7 @@
 % Please edit documentation in R/tag.R
 \name{rustrize}
 \alias{rustrize}
-\title{Generate the Bindings}
+\title{Generate Rust bindings}
 \usage{
 rustrize(pkgdir = ".")
 }
@@ -10,6 +10,6 @@ rustrize(pkgdir = ".")
 \item{pkgdir}{package path}
 }
 \description{
-Generate the Bindings
+Generate Rust bindings
 }
 

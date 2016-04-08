@@ -1,11 +1,11 @@
-#' Source rust file
+#' Source Rust file
 #'
-#' @param depend rustr version
-#' @param rebuild rebuild cache
-#' @param header add header
-#' @param path package path
-#' @param code rust code
-#' @param env  an environment, determining where the export R functions are evaluated
+#' @param path Rust file path
+#' @param code Rust code
+#' @param depend Rust dependencies
+#' @param rebuild Force rebuild cache
+#' @param header Add default Rust header
+#' @param env  An environment, determining where the export R functions are evaluated
 #' @export
 rust <- function(code, path, depend = NULL, header = TRUE, rebuild = FALSE, env = globalenv()) {
     if (!missing(code)) {
@@ -396,7 +396,7 @@ EnvRtools <- function() {
 }
 
 
-#' Temporary Folder for source_rust()
+#' Temporary folder for source_rust()
 #'
 #' @export
 SOURCE_RUST_PATH = new.env(parent = emptyenv())

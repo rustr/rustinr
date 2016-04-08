@@ -1,4 +1,4 @@
-#' Head of Rust Fdocile
+#' Header of Rust file
 #'
 #' @export
 headr = function() {

@@ -2,11 +2,11 @@
 % Please edit documentation in R/headr.R
 \name{headr}
 \alias{headr}
-\title{Head of Rust Fdocile}
+\title{Header of Rust file}
 \usage{
 headr()
 }
 \description{
-Head of Rust Fdocile
+Header of Rust file
 }
 

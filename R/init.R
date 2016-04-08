@@ -1,14 +1,17 @@
-#' Create a Skeleton for a New Source Package
+#' Create a Skeleton for a new source package
 #'
-#' @param name character string: the package name and directory name for your package.
-#' @param path path to put the package directory in.
-#' @param force If FALSE will not overwrite an existing directory.
-#' @param code_files a character vector with the paths to R code files to build the package around.
-#' @param rust_files rust files
-#' @param author author
-#' @param maintainer maintainer
-#' @param email email
-#' @param license license
+#' @param name A character string: the package name and directory name for your package.
+#' @param path A path to put the package directory in.
+#' @param force See \link[utils]{package.skeleton}
+#' @param code_files See \link[utils]{package.skeleton}
+#' @param rust_files A character vector with the paths to Rust source files to add to the package.
+#' @param author Author of the package.
+#' @param maintainer Maintainer of the package.
+#' @param email Email of the package maintainer.
+#' @param license License of the package.
+#' @references
+#' Read the \emph{Writing R Extensions} manual for more details.
+#'
 #' @export
 rustr_init <- function(name,
                        path = ".",
