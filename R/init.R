@@ -1,4 +1,4 @@
-#' Create a Skeleton for a new source package
+#' Create a skeleton for a new source package
 #'
 #' @param name A character string: the package name and directory name for your package.
 #' @param path A path to put the package directory in.

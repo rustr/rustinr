@@ -2,7 +2,7 @@
 % Please edit documentation in R/init.R
 \name{rustr_init}
 \alias{rustr_init}
-\title{Create a Skeleton for a new source package}
+\title{Create a skeleton for a new source package}
 \usage{
 rustr_init(name, path = ".", force = FALSE, code_files = character(),
   rust_files = character(), author = "Your Name", maintainer = if
@@ -29,7 +29,7 @@ rustr_init(name, path = ".", force = FALSE, code_files = character(),
 \item{license}{License of the package.}
 }
 \description{
-Create a Skeleton for a new source package
+Create a skeleton for a new source package
 }
 \references{
 Read the \emph{Writing R Extensions} manual for more details.
