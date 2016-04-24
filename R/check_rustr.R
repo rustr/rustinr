@@ -1,36 +1,41 @@
 #' Check rustr installation
 #' @param detail show more detail
 #' @export
-check_rustr = function(detail = FALSE){
+check_rustr = function(detail = FALSE) {
     origin_verbose = getOption("verbose")
-
+    checked = FALSE
+    res = NULL
     tryCatch({
-
         message('Running:
 library(rustinr)\n')
         library(rustinr)
-        message('Running:
+        message(
+            'Running:
 rust(code = \'
 // #[rustr_export]
 pub fn say_hi() -> String{
     "Hello World".into()
 }
 \')\n')
+
         rust(code = '
-// #[rustr_export]
-pub fn say_hi() -> String{
-    "Hello World".into()
-}
-')
-        res = say_hi()
-        if (res != "Hello World") {
-            warning("Something is not working correctly. Let's read more detail.")
-            find_info()
+             // #[rustr_export]
+             pub fn say_hi() -> String{
+             "Hello World".into()
+             }
+             ')
+        res = eval(quote(say_hi()))
+        if (is.null(res) || res != "Hello World")
+        {
+            checked = TRUE
+            find_info(res, OK = F)
             return(invisible(FALSE))
-        } else{
-            if (detail == T){
+        } else
+        {
+            checked = TRUE
+            if (detail == T) {
                 message("\nLet's find more info:\n")
-                find_info()
+                find_info(res)
             }
             message("\nGreat! It works!")
             return(invisible(TRUE))
@@ -39,44 +44,50 @@ pub fn say_hi() -> String{
     },
     error = function(e) stop(e),
     finally = {
+        if (!checked) find_info(res,OK=F)
         options(verbose = origin_verbose)
     })
 }
 
-find_info = function(){
+find_info = function(output, OK = T) {
+    if (is.null(output) || output != "Hello World") {
+        message("\nSomething is not working correctly. Let's read more detail.\n")
+    }
     options(verbose = TRUE)
     message('Running:
 library(rustinr)\n')
-    library(rustinr)
-    message('Running:
+    try(library(rustinr))
+    message(
+'Running:
 rust(code = \'
 // #[rustr_export]
 pub fn say_hi() -> String{
     "Hello World".into()
 }
 \')\n')
-    rust(code = '
-// #[rustr_export]
-pub fn say_hi() -> String{
-    "Hello World".into()
-}
-')
+    try(rust(code = '
+             // #[rustr_export]
+             pub fn say_hi() -> String{
+             "Hello World".into()
+             }
+             '))
     # find cargo
     message("\nFind cargo:")
-    res = system("which cargo")
-    message("\n")
-    if (res != 0){
-        warning("cargo is not in PATH")
+    info = try(system("which cargo"))
+    if (info != 0) {
+        message("cargo is not in PATH\n")
         message("Find CARGO_HOME:")
-        res = Sys.getenv('CARGO_HOME', unset = NA)
-        message(paste("CARGO_HOME =", res))
+        info_2 = Sys.getenv('CARGO_HOME', unset = NA)
 
-        if (is.na(res)) {
-            warning("CARGO_HOME is not set.")
+
+        if (is.na(info_2)){
+            message("CARGO_HOME is not set.\n")
+        } else{
+            message(paste("CARGO_HOME =", info_2,"\n"))
         }
     } else{
-        system("cargo --version")
-        system("rustc --version")
+        try(system("cargo --version"))
+        try(system("rustc --version"))
         message("\n")
     }
 
@@ -97,15 +108,24 @@ pub fn say_hi() -> String{
 
     # Rust build result
     message("Rust build result:")
-    print(list.files(file.path(SOURCE_RUST_PATH$obj,"src/rustlib/target/release")))
+    try(print(list.files(
+        file.path(SOURCE_RUST_PATH$obj, "src/rustlib/target/release")
+    )))
     message("\n")
 
     # check lib.rs
     message("Check lib.rs:")
-    cat(readLines(file.path(SOURCE_RUST_PATH$obj,"src/rustlib/src/lib.rs")),sep="\n")
+    try(cat(readLines(
+        file.path(SOURCE_RUST_PATH$obj, "src/rustlib/src/lib.rs")
+    ), sep = "\n"))
     message("\n")
 
     # R build result
     message("R build result")
-    print(list.files(file.path(SOURCE_RUST_PATH$obj,"src/")))
+    try(print(list.files(file.path(SOURCE_RUST_PATH$obj, "src/"))))
+    if (!OK) {
+        message("\n")
+        message("Something is not working correctly. rustr is not ready.")
+    }
+
 }
