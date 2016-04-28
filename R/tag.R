@@ -618,7 +618,7 @@ parse_func_inner = function(linenum, res, content) {
 }
 
 parse_func = function(linenum, res, content) {
-    if ((linenum + 1) < length(content)) {
+    if ((linenum + 1) <= length(content)) {
         func = parse_func_inner(linenum + 1, res, content)
         if (getOption("verbose")) {
             cat("funcion information :\n")
