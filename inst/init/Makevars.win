@@ -5,9 +5,9 @@ else
 endif
 
 ifeq "$(WIN)" "64"
-	RUST_ARCH=i686-pc-windows-gnu
-else
 	RUST_ARCH=x86_64-pc-windows-gnu
+else
+	RUST_ARCH=i686-pc-windows-gnu
 endif
 
 .PHONY: all
