@@ -113,6 +113,31 @@ get_typehead = function(input) {
     return(res)
 }
 
+get_ref_info = function(input){
+    input = trimws(input)
+
+    res = character(length(input))
+    mut = ref = logical(length(input))
+
+    for (xs in 1:length(input)) {
+        if (nchar(input[xs]) > 1 && substr(input[xs],0,1) == "&") {
+            ref[xs] = TRUE
+            trim_ref = trimws(substr(input[xs], 2, nchar(input[xs])))
+            if ( nchar(trim_ref) > 3 && substr(trim_ref,1,3) == "mut" ) {
+                mut[xs] = TRUE
+                res[xs] = substr(trim_ref, 4, nchar(trim_ref))
+            } else {
+                mut[xs] = FALSE
+                res[xs] = trim_ref
+            }
+        } else {
+            mut[xs] = ref[xs] = FALSE
+            res[xs] = input[xs]
+        }
+    }
+    list(mut = mut, ref = ref, type = res)
+}
+
 gen_fun = function(funclist, pkgname, funres) {
     # new info list
     # list( name = funcp, param = paramp, type = typep, ret = retp, rettype = rettype, roxchunk = res$roxbuffer)
@@ -149,17 +174,34 @@ gen_fun = function(funclist, pkgname, funres) {
                              sep = " ")
         #  rustr_name(a : SEXP, b : SEXP) -> SEXP or void
         rust_param = paste(paste(paste(funclist$param, "SEXP", sep = " : "), collapse = ", "))
-        # name(a_,b_)
-        rust_param_call = paste(paste(paste(funclist$param, "_", sep = ""), collapse = ", "))
 
         # [1] "let a_ : NumVec = unwrapr!( a.fromr() );\n"
         # [2] "let b_ : Int = unwrapr!( b.fromr() );\n"
-        typehead = get_typehead(funclist$type)
+        ref_info = get_ref_info(funclist$type)
+
+        # name(a_,b_)
+        param_ = paste(funclist$param, "_", sep = "")
+        mut_param = funclist$param
+
+        for (xs in 1:length(param_)) {
+            if (ref_info[["ref"]][xs] == TRUE){
+                if (ref_info[["mut"]][xs] == TRUE){
+                    param_[xs] = paste("&mut", param_[xs])
+                    mut_param[xs] = paste("mut", mut_param[xs])
+                } else {
+                    param_[xs] = paste("&", param_[xs])
+                }
+            }
+        }
+
+        rust_param_call = paste(param_, sep = " ", collapse = ",")
+
+        typehead = get_typehead(ref_info$type)
         rust_let = paste(
             "let ",
-            funclist$param,
+            mut_param,
             "_ : ",
-            funclist$type,
+            ref_info$type,
             " = ",
             unwrapr
             ,
