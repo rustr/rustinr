@@ -4,7 +4,7 @@
 \alias{rust}
 \title{Source Rust file}
 \usage{
-rust(code, path, depend = NULL, header = TRUE, rebuild = FALSE,
+rust(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALSE,
   env = globalenv())
 }
 \arguments{

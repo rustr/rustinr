@@ -7,7 +7,7 @@
 #' @param header Add default Rust header
 #' @param env  An environment, determining where the export R functions are evaluated
 #' @export
-rust <- function(code, path, depend = NULL, header = TRUE, rebuild = FALSE, env = globalenv()) {
+rust <- function(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALSE, env = globalenv()) {
     if (!missing(code)) {
         file <- tempfile(fileext = ".rs")
         con <- file(file, open = "w")
@@ -16,7 +16,7 @@ rust <- function(code, path, depend = NULL, header = TRUE, rebuild = FALSE, env 
                          "extern crate rustr;",
                          "pub mod export;",
                          "pub use rustr::*;"
-            ),con)
+            ), con)
         }
         writeLines(code, con)
         close(con)
@@ -25,7 +25,7 @@ rust <- function(code, path, depend = NULL, header = TRUE, rebuild = FALSE, env 
             cat(paste0("tempfile : ", path2, "\n"))
         }
     } else {
-        stopifnot(length(path) == 1)
+        stopifnot(!is.null(path))
         path2 = normalizePath(path)
     }
 

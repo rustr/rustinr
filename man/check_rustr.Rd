@@ -2,14 +2,17 @@
 % Please edit documentation in R/check_rustr.R
 \name{check_rustr}
 \alias{check_rustr}
-\title{Check rustr installation}
+\title{Check that rustr is installed}
 \usage{
 check_rustr(detail = FALSE)
 }
 \arguments{
-\item{detail}{show more detail}
+\item{detail}{Whether to provide more detail about the success or failure of
+the check. Set to FALSE by default.}
 }
 \description{
-Check rustr installation
+rust/R integration depends on both the \code{rustinr} R package
+and then \code{rustr} rust crate. This function tests that \code{rustr} is
+installed.
 }
 
