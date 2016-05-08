@@ -1,22 +1,28 @@
-#' Check rustr installation
-#' @param detail show more detail
+#' @title Check that rustr is installed
+#' @description rust/R integration depends on both the \code{rustinr} R package
+#' and then \code{rustr} rust crate. This function tests that \code{rustr} is
+#' installed.
+#'
+#' @param detail Whether to provide more detail about the success or failure of
+#' the check. Set to FALSE by default.
+#'
 #' @export
 check_rustr = function(detail = FALSE) {
     origin_verbose = getOption("verbose")
     checked = FALSE
     res = NULL
     tryCatch({
-        message('Running:
-library(rustinr)\n')
-        library(rustinr)
-        message(
-            'Running:
+        if(origin_verbose){
+            message("Running: library(rustinr)\n")
+            message('Running:
 rust(code = \'
 // #[rustr_export]
 pub fn say_hi() -> String{
     "Hello World".into()
 }
 \')\n')
+        }
+
 
         rust(code = '
              // #[rustr_export]
@@ -42,7 +48,6 @@ pub fn say_hi() -> String{
         }
 
     },
-    error = function(e) stop(e),
     finally = {
         if (!checked) find_info(res,OK=F)
         options(verbose = origin_verbose)
@@ -51,11 +56,10 @@ pub fn say_hi() -> String{
 
 find_info = function(output, OK = T) {
     if (is.null(output) || output != "Hello World") {
-        message("\nSomething is not working correctly. Let's read more detail.\n")
+        message("\nSomething is not working correctly. Getting more detail.\n")
     }
     options(verbose = TRUE)
-    message('Running:
-library(rustinr)\n')
+    message('Running:\nlibrary(rustinr)\n')
     try(library(rustinr))
     message(
 'Running:
