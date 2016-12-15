@@ -111,8 +111,14 @@ rustr_init <- function(name,
 
     file.copy(file.path(skeleton, "Makevars.win"),
               file.path(src, "Makevars.win"))
-    file.copy(file.path(skeleton, "Makevars"),
-              file.path(src, "Makevars"))
+    if(Sys.info()["sysname"] == "FreeBSD"){
+        file.copy(file.path(skeleton, "Makevars.bsd"),
+                  file.path(src, "Makevars"))
+    } else{
+        file.copy(file.path(skeleton, "Makevars"),
+                  file.path(src, "Makevars"))
+    }
+
 
     file.copy(file.path(skeleton, "Cargo.toml"),
               file.path(rustlib_src, "Cargo.toml"))
