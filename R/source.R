@@ -157,9 +157,13 @@ rust <- function(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALS
     }, finally = {
         if (!succeeded)
             .showBuildFailureDiagnostics()
-        setwd(cwd)
+        if(!is.null(cwd)){
+            setwd(cwd)
+        }
         restore(envRestore)
-        setwd(cwd)
+        if(!is.null(cwd)){
+            setwd(cwd)
+        }
     })
 }
 
