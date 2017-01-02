@@ -1,10 +1,10 @@
 #' @title Check rustinr status
-#' @description \code{check_rustr} checks the status of rustinr, rustc, and cargo installation.
+#' @description \code{rustr_check} checks the status of rustinr, rustc, and cargo installation.
 #'
 #' @param detail print detail info, FALSE by default.
 #'
 #' @export
-check_rustr = function(detail = FALSE) {
+rustr_check = function(detail = FALSE) {
     origin_verbose = getOption("verbose")
     checked = FALSE
     res = NULL

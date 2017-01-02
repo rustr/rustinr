@@ -1,4 +1,5 @@
 #' Generate Rust bindings
+#'
 #' @param pkgdir package path
 #' @export
 rustrize <- function(pkgdir = ".") {

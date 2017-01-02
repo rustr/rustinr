@@ -406,7 +406,7 @@ EnvRtools <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' check_rustr()
+#' rustr_check()
 #' RUSTINR_TEMP$obj
 #' list.dirs(RUSTINR_TEMP$obj)
 #' RUSTINR_TEMP$rss

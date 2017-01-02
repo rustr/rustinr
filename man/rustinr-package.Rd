@@ -15,6 +15,6 @@
 
 \code{headr()} gives you the header of the \code{lib.rs} for the Rust code.
 
-\code{check_rustr} checks the status of rustinr, rustc, and cargo installation.
+\code{rustr_check} checks the status of rustinr, rustc, and cargo installation.
 }
 
