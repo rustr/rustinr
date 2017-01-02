@@ -1,6 +1,6 @@
 # Sample .travis.yml for R projects.
 #
-# See the r-travis repo and its wiki 
+# See the r-travis repo and its wiki
 #   https://github.com/craigcitro/r-travis/wiki
 #   https://github.com/eddelbuettel/r-travis/
 language: rust
@@ -21,11 +21,6 @@ os:
 osx_image: xcode7.1
 
 sudo: required
-
-# run builds for all the trains (and more)
-rust:
-  - nightly
-  - stable
 
 env:
   global:
@@ -48,8 +43,8 @@ install:
 
 before_script:
   - ./travis-tool.sh dump_sysinfo
-  
-script: 
+
+script:
   - ./travis-tool.sh run_tests
 
 after_failure:
@@ -57,7 +52,7 @@ after_failure:
 
 after_success:
   - ./travis-tool.sh dump_logs
-  
+
 notifications:
   email:
     on_success: change
