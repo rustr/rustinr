@@ -1,5 +1,7 @@
 #' Header of Rust file
 #'
+#' These lines should be in the head of lib.rs file.
+#'
 #' @export
 headr = function() {
     cat(

@@ -1,10 +1,7 @@
-#' @title Check that rustr is installed
-#' @description rust/R integration depends on both the \code{rustinr} R package
-#' and then \code{rustr} rust crate. This function tests that \code{rustr} is
-#' installed.
+#' @title Check rustinr status
+#' @description \code{check_rustr} checks the status of rustinr, rustc, and cargo installation.
 #'
-#' @param detail Whether to provide more detail about the success or failure of
-#' the check. Set to FALSE by default.
+#' @param detail print detail info, FALSE by default.
 #'
 #' @export
 check_rustr = function(detail = FALSE) {
@@ -40,7 +37,7 @@ pub fn say_hi() -> String{
         {
             checked = TRUE
             if (detail == T) {
-                message("\nLet's find more info:\n")
+                message("\nMore info:\n")
                 find_info(res)
             }
             message("\nGreat! It works!")
@@ -69,6 +66,7 @@ pub fn say_hi() -> String{
     "Hello World".into()
 }
 \')\n')
+    message("Running: Rust code parsing")
     try(rust(code = '
              // #[rustr_export]
              pub fn say_hi() -> String{

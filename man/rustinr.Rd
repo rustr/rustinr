@@ -6,6 +6,17 @@
 \alias{rustinr-package}
 \title{Package rustinr}
 \description{
-Package rustinr
+\code{rustinr} helps user source Rust script in R and generate the basic struture of a Rust-R package.
+}
+\details{
+\code{rust()} creates Rust functions in R console interatively.
+
+\code{rustr_init()} creates an R package with Rust support.
+
+\code{rustrize()} generates R bindings for Rust functions in a R package. It is similar to \code{compileAttributes()} in Rcpp.
+
+\code{headr()} gives you the header of the \code{lib.rs} for the Rust code.
+
+\code{check_rustr} checks the status of rustinr, rustc, and cargo installation.
 }
 

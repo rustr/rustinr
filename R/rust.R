@@ -400,9 +400,19 @@ EnvRtools <- function() {
 }
 
 
-#' Temporary folder for source_rust()
+#' Temporary folder for \code{rust()} function
 #'
+#' \code{rust()} function creates a temporary folder for Rust code generation. Users can get the path to this folder with \code{RUSTINR_TEMP$obj}, and get the ramdon string which is the prefix of generated Rust functions with \code{RUSTINR_TEMP$rss}.
+#'
+#' @examples
+#' \dontrun{
+#' check_rustr()
+#' RUSTINR_TEMP$obj
+#' list.dirs(RUSTINR_TEMP$obj)
+#' RUSTINR_TEMP$rss
+#'
+#' }
 #' @export
-SOURCE_RUST_PATH = new.env(parent = emptyenv())
+RUSTINR_TEMP = new.env(parent = emptyenv())
 
-SOURCE_RUST_PATH$obj = NULL
+RUSTINR_TEMP$obj = NULL
