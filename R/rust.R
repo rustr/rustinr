@@ -6,6 +6,24 @@
 #' @param rebuild Force rebuild cache
 #' @param header Add default Rust header
 #' @param env  An environment, determining where the export R functions are evaluated
+#'
+#' @examples
+#' \dontrun{
+#'  rust('
+#'  // #[rustr_export]
+#'  pub fn say_hi() -> String{
+#'         "Hello World".into()
+#'  }
+#' ')
+#'
+#' rust(code = 'some code',
+#'      depend = '
+#' [dependencies]
+#' rustr = {path = "local/rustr"}
+#' extra_dep_on_crates_io = 0.1.1
+#' ')
+#'
+#' }
 #' @export
 rust <- function(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALSE, env = globalenv()) {
     if (!missing(code)) {
@@ -31,17 +49,17 @@ rust <- function(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALS
 
     cwd <- getwd()
 
-    if (is.null(SOURCE_RUST_PATH$obj) || rebuild == TRUE) {
+    if (is.null(RUSTR_TEMP$obj) || rebuild == TRUE) {
         rss = random_string()
         pathdir = suppressWarnings(normalizePath(file.path(tempdir(), rss)))
-        SOURCE_RUST_PATH$obj = pathdir
-        SOURCE_RUST_PATH$rss = rss
+        RUSTR_TEMP$obj = pathdir
+        RUSTR_TEMP$rss = rss
         reboot = T
         rss2 = rss
     } else{
-        pathdir = SOURCE_RUST_PATH$obj
+        pathdir = RUSTR_TEMP$obj
         reboot = F
-        rss = SOURCE_RUST_PATH$rss
+        rss = RUSTR_TEMP$rss
         rss2 =  random_string()
     }
 
@@ -402,17 +420,22 @@ EnvRtools <- function() {
 
 #' Temporary folder for \code{rust()} function
 #'
-#' \code{rust()} function creates a temporary folder for Rust code generation. Users can get the path to this folder with \code{RUSTINR_TEMP$obj}, and get the ramdon string which is the prefix of generated Rust functions with \code{RUSTINR_TEMP$rss}.
+#' \code{rust()} function creates a temporary folder for Rust code generation. Users can get the path to this folder with \code{RUSTR_TEMP$obj}, and get the ramdon string which is the prefix of generated Rust functions with \code{RUSTR_TEMP$rss}.
 #'
 #' @examples
 #' \dontrun{
-#' rustr_check()
-#' RUSTINR_TEMP$obj
-#' list.dirs(RUSTINR_TEMP$obj)
-#' RUSTINR_TEMP$rss
 #'
+#' rustr_check()
+#'
+#' RUSTR_TEMP$obj
+#'
+#' list.dirs(RUSTR_TEMP$obj)
+#'
+#' RUSTR_TEMP$rss
+#'
+#' readLines(file.path(RUSTR_TEMP$obj, "src", "REXPORT.c"))
 #' }
 #' @export
-RUSTINR_TEMP = new.env(parent = emptyenv())
+RUSTR_TEMP = new.env(parent = emptyenv())
 
-RUSTINR_TEMP$obj = NULL
+RUSTR_TEMP$obj = NULL

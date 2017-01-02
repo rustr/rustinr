@@ -10,6 +10,6 @@ rustr_clean_build(pkgdir = ".")
 \item{pkgdir}{package path}
 }
 \description{
-This function cleans
+\code{rustr_clean_build} cleans the build target of \code{cargo build}.
 }
 

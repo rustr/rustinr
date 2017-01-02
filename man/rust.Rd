@@ -23,4 +23,22 @@ rust(code, path = NULL, depend = NULL, header = TRUE, rebuild = FALSE,
 \description{
 Source Rust file
 }
+\examples{
+\dontrun{
+ rust('
+ // #[rustr_export]
+ pub fn say_hi() -> String{
+        "Hello World".into()
+ }
+')
+
+rust(code = 'some code',
+     depend = '
+[dependencies]
+rustr = {path = "local/rustr"}
+extra_dep_on_crates_io = 0.1.1
+')
+
+}
+}
 

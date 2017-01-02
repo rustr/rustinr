@@ -105,26 +105,26 @@ pub fn say_hi() -> String{
 
     # Rust temporary  source
     message("Rust temporary source:")
-    message(SOURCE_RUST_PATH$obj)
+    message(RUSTR_TEMP$obj)
     message("\n")
 
     # Rust build result
     message("Rust build result:")
     try(print(list.files(
-        file.path(SOURCE_RUST_PATH$obj, "src/rustlib/target/release")
+        file.path(RUSTR_TEMP$obj, "src/rustlib/target/release")
     )))
     message("\n")
 
     # check lib.rs
     message("Check lib.rs:")
     try(cat(readLines(
-        file.path(SOURCE_RUST_PATH$obj, "src/rustlib/src/lib.rs")
+        file.path(RUSTR_TEMP$obj, "src/rustlib/src/lib.rs")
     ), sep = "\n"))
     message("\n")
 
     # R build result
     message("R build result")
-    try(print(list.files(file.path(SOURCE_RUST_PATH$obj, "src/"))))
+    try(print(list.files(file.path(RUSTR_TEMP$obj, "src/"))))
     if (!OK) {
         message("\n")
         message("Something is not working correctly. rustr is not ready.")

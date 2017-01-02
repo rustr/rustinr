@@ -1,6 +1,6 @@
 #' Clean Rust build target
 #'
-#' This function cleans
+#' \code{rustr_clean_build} cleans the build target of \code{cargo build}.
 #'
 #' @param pkgdir package path
 #' @export
