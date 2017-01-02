@@ -12,6 +12,5 @@
 #'
 #' \code{check_rustr} checks the status of rustinr, rustc, and cargo installation.
 #'
-#' @name rustinr
-#' @docType package
+#' @name rustinr-package
 NULL
