@@ -17,7 +17,7 @@
 #' @param license License of the package.
 #' @references
 #' Read the \emph{Writing R Extensions} manual for more details.
-#' @seealso \link{https://book.rustr.org/create-a-rust-r-package.html}
+#' @seealso https://book.rustr.org/create-a-rust-r-package.html
 #' @examples
 #' \dontrun{
 #'

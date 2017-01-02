@@ -46,6 +46,6 @@ rustr_init("test-pkg")
 Read the \emph{Writing R Extensions} manual for more details.
 }
 \seealso{
-\link{https://book.rustr.org/create-a-rust-r-package.html}
+https://book.rustr.org/create-a-rust-r-package.html
 }
 
