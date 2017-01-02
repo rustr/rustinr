@@ -9,4 +9,18 @@ headr()
 \description{
 These lines should be in the head of lib.rs file.
 }
+\examples{
+\dontrun{
+
+#[macro_use]
+extern crate rustr;
+pub mod export;
+pub use rustr::*;
+
+// #[rustr_export]
+pub fn say_hi()->RResult<String>{
+    Ok("hello world".into())
+}
+}
+}
 
