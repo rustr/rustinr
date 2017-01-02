@@ -1,9 +1,9 @@
 Package: rustinr
 Type: Package
-Title: R and Rust Integration Devtool
+Title: R and Rust Integration
 Version: 0.1.0
 Author: Qin Wenfeng
-Maintainer: Qin Wenfeng <mail@qinwenfeng.com>
+Maintainer: Qin Wenfeng <r-pkg@qinwenfeng.com>
 Description: rustr is a Rust library that provides a Rust API to work with R. Write pure Rust code with rustr, and then use rustinr R package to generate Rust interface in R.
 License: Apache License 2.0
 LazyData: TRUE
