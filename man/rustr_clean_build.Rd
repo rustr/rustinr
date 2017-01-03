@@ -4,10 +4,12 @@
 \alias{rustr_clean_build}
 \title{Clean Rust build target}
 \usage{
-rustr_clean_build(pkgdir = ".")
+rustr_clean_build(pkgdir = ".", lib_only = FALSE)
 }
 \arguments{
 \item{pkgdir}{package path}
+
+\item{lib_only}{only remove builded static library}
 }
 \description{
 \code{rustr_clean_build} cleans the build target of \code{cargo build}.
